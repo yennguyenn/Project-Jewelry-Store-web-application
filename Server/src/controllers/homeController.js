@@ -1,6 +1,7 @@
 import { Json } from 'sequelize/lib/utils'
 import db from '../models/index'
 import { createNewUser } from '../services/CRUDservice'
+import userService from '../services/userService'
 const CRUDservice = require("../services/CRUDservice")
 
 let getHomepage = async (req, res) => {
@@ -47,6 +48,11 @@ let getEditCRUD =async (req, res) => {
     else
         return res.send("user not found")
 }
+let postCreateNewuser = async(req,res)=>{
+    console.log("post createNewUser in homecontroller");
+    let message = await userService.createNewUser(req.body)
+    return res.send(message)
+}
 module.exports = {
     getHomepage: getHomepage,
     getAboutPage: getAboutPage,
@@ -54,4 +60,5 @@ module.exports = {
     postCRUD: postCRUD,
     displayGetCRUD: displayGetCRUD,
     getEditCRUD: getEditCRUD,
+    postCreateNewuser:postCreateNewuser,
 }
